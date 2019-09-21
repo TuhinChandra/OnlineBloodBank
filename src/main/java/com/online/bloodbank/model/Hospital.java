@@ -20,8 +20,8 @@ public class Hospital {
 	private Contact contact;
 
 	public Hospital() {
-		// TODO Auto-generated constructor stub added for
 	}
+
 	public String getHospitalName() {
 		return hospitalName;
 	}
