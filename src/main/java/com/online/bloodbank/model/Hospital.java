@@ -8,9 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-
 public class Hospital {
-
 	@Id
 	@GeneratedValue
 	private long ID;
