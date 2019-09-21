@@ -20,6 +20,7 @@ public class Hospital {
 	private Contact contact;
 
 	public Hospital() {
+
 	}
 
 	public String getHospitalName() {
