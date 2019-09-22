@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.online.bloodbank.model.AdminUsers;
+import com.online.bloodbank.model.Blood;
 import com.online.bloodbank.model.Hospital;
 import com.online.bloodbank.repository.AdminRepository;
+import com.online.bloodbank.repository.BloodRepository;
 import com.online.bloodbank.repository.HospitalRepository;
 
 @Service
@@ -47,6 +49,15 @@ public class AdminService {
 		} else {
 			return hospitalList.get(0);
 		}
+	}
+
+	@Autowired
+	private BloodRepository bloodRepository;
+
+	public Blood addBloodStockInHospital(final Blood blood) {
+
+		return bloodRepository.save(blood);
+
 	}
 
 }

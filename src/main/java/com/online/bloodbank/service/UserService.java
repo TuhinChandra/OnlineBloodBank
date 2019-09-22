@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.online.bloodbank.model.Blood;
 import com.online.bloodbank.model.Patient;
 import com.online.bloodbank.model.Users;
+import com.online.bloodbank.repository.BloodRepository;
 import com.online.bloodbank.repository.PatientRepository;
 import com.online.bloodbank.repository.UserRepository;
 
@@ -14,9 +16,6 @@ import com.online.bloodbank.repository.UserRepository;
 public class UserService {
 	@Autowired
 	private UserRepository userRepository;
-
-	@Autowired
-	private PatientRepository patientRepository;
 
 	public Users registerUser(final Users user) {
 		final Users userSaved = userRepository.save(user);
@@ -33,6 +32,9 @@ public class UserService {
 		}
 	}
 
+	@Autowired
+	private PatientRepository patientRepository;
+
 	public Patient registerPatient(final Patient patient) {
 		return patientRepository.save(patient);
 	}
@@ -45,5 +47,17 @@ public class UserService {
 			return patientList.get(0);
 		}
 
+	}
+
+	@Autowired
+	private BloodRepository bloodRepository;
+
+	public List<Blood> fetchBloodStock(final String bloodGroup) {
+		final List<Blood> bloodList = bloodRepository.findBybloodGroup(bloodGroup);
+		if (bloodList.isEmpty()) {
+			return null;
+		} else {
+			return bloodList;
+		}
 	}
 }

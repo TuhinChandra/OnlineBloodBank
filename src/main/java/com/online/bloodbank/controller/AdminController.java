@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.online.bloodbank.model.Address;
 import com.online.bloodbank.model.AdminUsers;
+import com.online.bloodbank.model.Blood;
 import com.online.bloodbank.model.Contact;
 import com.online.bloodbank.model.Hospital;
 import com.online.bloodbank.service.AdminService;
@@ -33,7 +34,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/admin/login", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public AdminUsers loginEmployee(@RequestParam("fullName") final String fullName,
+	public AdminUsers loginAdmin(@RequestParam("fullName") final String fullName,
 			@RequestParam("password") final String password) {
 
 		final AdminUsers admin = adminService.findByIDAdminUsers(fullName, password);
@@ -60,6 +61,15 @@ public class AdminController {
 	@PostMapping(value = "/hospital/fetchFromName/", produces = "application/json")
 	public Hospital fetchHospitalFromName(@RequestParam("hospitalName") final String hospitalName) {
 		return adminService.findByhospitalName(hospitalName);
+	}
+
+	@PostMapping(value = "/add/bloodStock/", produces = "application/json")
+	public Blood addBloodStock(@RequestParam("bloodGroup") final String bloodGroup,
+			@RequestParam("bloodType") final String bloodType, @RequestParam("bloodStock") final int bloodStock,
+			@RequestParam("hospitalName") final String hospitalName) {
+		final Hospital hospital = adminService.findByhospitalName(hospitalName);
+		final Blood blood = new Blood(bloodGroup, bloodType, bloodStock, hospital);
+		return adminService.addBloodStockInHospital(blood);
 	}
 
 }
