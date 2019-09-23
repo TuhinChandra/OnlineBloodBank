@@ -60,4 +60,37 @@ public class AdminService {
 
 	}
 
+	public Blood updateBloodStockInHospital(final Blood blood, final int issuedStockQty, final String hospitalName) {
+
+		Blood updatedBlood = null;
+		final List<Blood> bloodList = bloodRepository.findByBloodGroupAndBloodType(blood.getBloodGroup(),
+				blood.getBloodType());
+
+		if (bloodList.isEmpty()) {
+			return null;
+		} else {
+
+			for (int i = 0; i < bloodList.size(); i++) {
+				if (bloodList.get(i).getHospital().getHospitalName().equals(hospitalName)) {
+					updatedBlood = bloodList.get(i);
+					final int updatedStock = updatedBlood.getBloodStock() - issuedStockQty;
+					updatedBlood.setBloodStock(updatedStock);
+					bloodRepository.save(updatedBlood);
+					break;
+
+				} else {
+					continue;
+				}
+			}
+
+		}
+		return bloodRepository.save(updatedBlood);
+
+	}
+
+	public void deleteBlood(final long id) {
+
+		bloodRepository.deleteById(id);
+	}
+
 }

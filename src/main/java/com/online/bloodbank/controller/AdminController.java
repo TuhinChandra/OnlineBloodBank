@@ -1,9 +1,11 @@
 package com.online.bloodbank.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,7 +48,7 @@ public class AdminController {
 		}
 	}
 
-	@PostMapping(value = "/hospital/registration/", produces = "application/json")
+	@GetMapping(value = "/hospital/registration/", produces = "application/json")
 	public Hospital registerHospital(@RequestParam("registrationNo") final String registrationNo,
 			@RequestParam("hospitalName") final String hospitalName, @RequestParam("city") final String city,
 			@RequestParam("streetNo") final String streetNo, @RequestParam("pinCode") final long pinCode,
@@ -63,13 +65,37 @@ public class AdminController {
 		return adminService.findByhospitalName(hospitalName);
 	}
 
-	@PostMapping(value = "/add/bloodStock/", produces = "application/json")
+	@GetMapping(value = "/bloodStock/", produces = "application/json")
 	public Blood addBloodStock(@RequestParam("bloodGroup") final String bloodGroup,
 			@RequestParam("bloodType") final String bloodType, @RequestParam("bloodStock") final int bloodStock,
 			@RequestParam("hospitalName") final String hospitalName) {
+
 		final Hospital hospital = adminService.findByhospitalName(hospitalName);
-		final Blood blood = new Blood(bloodGroup, bloodType, bloodStock, hospital);
-		return adminService.addBloodStockInHospital(blood);
+		if (hospital.getHospitalName().equalsIgnoreCase(hospitalName)) {
+			final Blood blood = new Blood(bloodGroup, bloodType, bloodStock, hospital);
+			return adminService.addBloodStockInHospital(blood);
+		} else {
+			return null;
+		}
+	}
+
+	@PutMapping(value = "/bloodStock/", produces = "application/json")
+	public Blood updateBloodStock(@RequestParam("bloodGroup") final String bloodGroup,
+			@RequestParam("bloodType") final String bloodType, @RequestParam("issuedStockQty") final int issuedStockQty,
+			@RequestParam("hospitalName") final String hospitalName) {
+
+		final Hospital hospital = adminService.findByhospitalName(hospitalName);
+		if (hospital.getHospitalName().equalsIgnoreCase(hospitalName)) {
+			final Blood blood = new Blood(bloodGroup, bloodType, 0, hospital);
+			return adminService.updateBloodStockInHospital(blood, issuedStockQty, hospitalName);
+		} else {
+			return null;
+		}
+	}
+
+	@DeleteMapping("Blood")
+	public void deleteBloood(@RequestParam("id") final Integer id) {
+		adminService.deleteBlood(id);
 	}
 
 }

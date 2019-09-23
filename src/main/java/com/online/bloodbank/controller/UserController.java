@@ -55,10 +55,4 @@ public class UserController {
 		return userService.findPatient(patientName);
 	}
 
-	/*
-	 * @PostMapping(value = "/user/fetch/bloodStock/", produces =
-	 * "application/json") public List<Blood>
-	 * getBloodStock(@RequestParam("bloodGroup") final String bloodGroup) { return
-	 * userService.fetchBloodStock(bloodGroup); }
-	 */
 }

@@ -53,7 +53,7 @@ public class UserService {
 	private BloodRepository bloodRepository;
 
 	public List<Blood> fetchBloodStock(final String bloodGroup) {
-		final List<Blood> bloodList = bloodRepository.findBybloodGroup(bloodGroup);
+		final List<Blood> bloodList = bloodRepository.findByBloodGroup(bloodGroup);
 		if (bloodList.isEmpty()) {
 			return null;
 		} else {

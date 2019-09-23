@@ -14,9 +14,9 @@ public class Hospital {
 	private long ID;
 	private String registrationNo;
 	private String hospitalName;
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Address address;
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Contact contact;
 
 	public Hospital() {
