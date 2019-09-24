@@ -1,68 +1,49 @@
 package com.online.bloodbank.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.online.bloodbank.model.Blood;
+import com.online.bloodbank.model.Hospital;
 import com.online.bloodbank.service.BloodService;
 
 @RestController
 public class BloodController {
 
-	/*
-	 * @Autowired private BloodRepository bloodRepository;
-	 */
-
 	@Autowired
 	private BloodService bloodService;
 
-	@Autowired
-	private HospitalController hospitalController;
+	// TODO: POST
+	@PostMapping(value = "/bloodStock/", produces = "application/json")
+	public Blood addBloodStock(@RequestParam("bloodGroup") final String bloodGroup,
+			@RequestParam("bloodType") final String bloodType, @RequestParam("bloodStock") final int bloodStock,
+			@RequestParam("hospitalName") final String hospitalName) {
 
-	/*
-	 * @RequestMapping(value =
-	 * "/registerBlood/{bloodGroup}/{bloodType}/{bloodStock}/{hospitalName}/{registrationNo}/{city}/{streetNo}/{pinCode}/{state}/{contactName}/{emailID}/{contactNo}",
-	 * method = RequestMethod.GET, produces = "application/json")
-	 *
-	 * @ResponseBody public Blood registerBlood(@PathVariable("bloodGroup") final
-	 * String bloodGroup,
-	 *
-	 * @PathVariable("bloodType") final String
-	 * bloodType, @PathVariable("bloodStock") final int bloodStock,
-	 *
-	 * @PathVariable("hospitalName") final String hospitalName,
-	 *
-	 * @PathVariable("registrationNo") final String
-	 * registrationNo, @PathVariable("city") final String city,
-	 *
-	 * @PathVariable("streetNo") final String streetNo, @PathVariable("pinCode")
-	 * final long pinCode,
-	 *
-	 * @PathVariable("state") final String state, @PathVariable("contactName") final
-	 * String contactName,
-	 *
-	 * @PathVariable("emailID") final String emailID, @PathVariable("contactNo")
-	 * final long contactNo) throws Exception {
-	 *
-	 * // Hospital hospital = hospitalController.findByHospitalName(hospitalName);
-	 * Blood blood = new Blood();
-	 *
-	 * if (hospital.getHospitalName().equals(hospitalName)) { blood =
-	 * bloodService.addNewBloodStock(bloodGroup, bloodType, bloodStock, hospital); }
-	 * else {
-	 *
-	 * final Hospital hospital = hospitalController.registerHospital(hospitalName,
-	 * registrationNo, city, streetNo, pinCode, state, contactName, emailID,
-	 * contactNo); blood = bloodService.addNewBloodStock(bloodGroup, bloodType,
-	 * bloodStock, hospital);
-	 *
-	 * return blood;
-	 *
-	 * }
-	 */
+		final Hospital hospital = new Hospital(null, hospitalName, null, null);
+		final Blood blood = new Blood(bloodGroup, bloodType, bloodStock, hospital);
+		return bloodService.addBloodStockInHospital(blood);
 
-	/*
-	 * @PostMapping(value = "/search/all/blood", produces = "application/json")
-	 * public List<Blood> getAllBlood() { return bloodRepository.findAll(); }
-	 */
+	}
+
+	@DeleteMapping("Blood")
+	public void deleteBloood(@RequestParam("id") final int id) {
+		bloodService.deleteBlood(id);
+	}
+
+	@PutMapping(value = "/bloodStock/", produces = "application/json")
+	public Blood updateBloodStock(@RequestParam("bloodGroup") final String bloodGroup,
+			@RequestParam("bloodType") final String bloodType, @RequestParam("issuedStockQty") final int issuedStockQty,
+			@RequestParam("hospitalName") final String hospitalName) {
+
+		final Hospital hospital = new Hospital(null, hospitalName, null, null);
+		final Blood blood = new Blood(bloodGroup, bloodType, 0, hospital);
+
+		return bloodService.updateBloodStockInHospital(blood, issuedStockQty);
+
+	}
 
 }

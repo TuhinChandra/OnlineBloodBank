@@ -1,5 +1,7 @@
 package com.online.bloodbank.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +17,23 @@ public class ContactService {
 		final Contact contact = new Contact(contactName, emailID, contactNo);
 		final Contact con = contactRepository.save(contact);
 		return con;
+	}
+
+	public Contact getContactDetails(final long id) {
+		final List<Contact> listContact = contactRepository.findById(id);
+		if (listContact.isEmpty()) {
+			return null;
+		} else {
+			return listContact.get(0);
+		}
+
+	}
+
+	public Contact updateContact(final long id, final String emailID, final long contactNo) {
+		final Contact contact = getContactDetails(id);
+		contact.setEmailID(emailID);
+		contact.setContactNo(contactNo);
+		return contactRepository.save(contact);
+
 	}
 }

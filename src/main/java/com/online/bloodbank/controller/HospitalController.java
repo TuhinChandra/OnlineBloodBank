@@ -1,80 +1,39 @@
 package com.online.bloodbank.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.online.bloodbank.model.Address;
+import com.online.bloodbank.model.Contact;
+import com.online.bloodbank.model.Hospital;
 import com.online.bloodbank.service.HospitalService;
 
 @RestController
 
 public class HospitalController {
 
-	/*
-	 * @Autowired private HospitalRepository hospitalRepository;
-	 */
-
-	@Autowired
-	private AddressController addressController;
-
-	@Autowired
-	private ContactController contactController;
-
 	@Autowired
 	private HospitalService hospitalService;
 
-	/*
-	 * @GetMapping(value = "/register/hospital", produces = "application/json")
-	 * public Hospital getHospital() { final Address address = new
-	 * Address("Kolkata", "New Town", 700056, "West Bengal"); final Contact contact
-	 * = new Contact("TMC Admin", "tmc@hotmail.com", 9); final Hospital hospital =
-	 * new Hospital("TMC Kolkata", "TMC001", address, contact);
-	 * hospitalRepository.save(hospital); return hospital; }
-	 */
+	// TODO: Use Post
+	@PostMapping(value = "/hospital/registration/", produces = "application/json")
+	public Hospital registerHospital(@RequestParam("registrationNo") final String registrationNo,
+			@RequestParam("hospitalName") final String hospitalName, @RequestParam("city") final String city,
+			@RequestParam("streetNo") final String streetNo, @RequestParam("pinCode") final long pinCode,
+			@RequestParam("state") final String state, @RequestParam("contactName") final String contactName,
+			@RequestParam("emailID") final String emailID, @RequestParam("contactNo") final long contactNo) {
+		final Address address = new Address(city, streetNo, pinCode, state);
+		final Contact contact = new Contact(contactName, emailID, contactNo);
+		final Hospital hospital = new Hospital(registrationNo, hospitalName, address, contact);
+		return hospitalService.registerHospital(hospital);
+	}
 
-	/*
-	 * @RequestMapping(value =
-	 * "/registerHospital/{hospitalName}/{registrationNo}/{city}/{streetNo}/{pinCode}/{state}/{contactName}/{emailID}/{contactNo}",
-	 * method = RequestMethod.GET, produces = "application/json")
-	 *
-	 * @ResponseBody public Hospital registerHospital(@PathVariable("hospitalName")
-	 * final String hospitalName,
-	 *
-	 * @PathVariable("registrationNo") final String
-	 * registrationNo, @PathVariable("city") final String city,
-	 *
-	 * @PathVariable("streetNo") final String streetNo, @PathVariable("pinCode")
-	 * final long pinCode,
-	 *
-	 * @PathVariable("state") final String state, @PathVariable("contactName") final
-	 * String contactName,
-	 *
-	 * @PathVariable("emailID") final String emailID, @PathVariable("contactNo")
-	 * final long contactNo) throws Exception {
-	 *
-	 * final Address address = addressController.createAddress(city, streetNo,
-	 * pinCode, state);
-	 *
-	 * final Contact contact = contactController.createContact(contactName, emailID,
-	 * contactNo); return hospitalService.register(hospitalName, registrationNo,
-	 * address, contact); }
-	 */
-
-	/*
-	 * @RequestMapping(value = "/findHospital/{hospitalName}", method =
-	 * RequestMethod.GET, produces = "application/json")
-	 *
-	 * @ResponseBody public Hospital
-	 * findByHospitalName(@PathVariable("hospitalName") final String hospitalName) {
-	 * final Hospital hospital = hospitalService.findByHospitalName(hospitalName);
-	 * return hospital;
-	 *
-	 * }
-	 *
-	 * @RequestMapping(value = "/findHospital/{ID}", method = RequestMethod.GET,
-	 * produces = "application/json")
-	 *
-	 * @ResponseBody public Hospital findByHospitalID(@PathVariable("ID") final long
-	 * ID) { final Hospital hospital = hospitalService.findByHospitalID(ID); return
-	 * hospital; }
-	 */
+	// TODO: @GetMapping
+	@GetMapping(value = "/hospital/fetchFromName/", produces = "application/json")
+	public Hospital fetchHospitalFromName(@RequestParam("hospitalName") final String hospitalName) {
+		return hospitalService.findByhospitalName(hospitalName);
+	}
 }
