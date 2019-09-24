@@ -28,7 +28,6 @@ public class AdminController {
 
 	// TODO: Use @PostMapping
 	@PostMapping(value = "/admin/login", produces = "application/json")
-
 	@ResponseBody
 	public AdminUsers loginAdmin(@RequestParam("fullName") final String fullName,
 			@RequestParam("password") final String password) {
