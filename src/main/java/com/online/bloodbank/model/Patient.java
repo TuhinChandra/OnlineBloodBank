@@ -1,8 +1,11 @@
 package com.online.bloodbank.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 
@@ -13,6 +16,8 @@ public class Patient {
 	private long id;
 	private String patientName;
 	private String bloodGroup;
+	@OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Requisition requisition;
 
 	public Patient() {
 		super();
