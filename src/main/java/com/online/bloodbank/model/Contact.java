@@ -29,7 +29,7 @@ public class Contact {
 
 	@OneToOne(mappedBy = "contact", fetch = FetchType.EAGER)
 	@JsonIgnore
-	private AdminUsers adminUsers;
+	private AdminUser adminUsers;
 
 	public Contact() {
 		super();
@@ -75,11 +75,11 @@ public class Contact {
 		this.id = id;
 	}
 
-	public AdminUsers getAdminUsers() {
+	public AdminUser getAdminUsers() {
 		return adminUsers;
 	}
 
-	public void setAdminUsers(final AdminUsers adminUsers) {
+	public void setAdminUsers(final AdminUser adminUsers) {
 		this.adminUsers = adminUsers;
 	}
 

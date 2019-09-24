@@ -18,22 +18,13 @@ public class UserService {
 		return userSaved;
 	}
 
-	public Users findByIDUsers(final String fullName, final String password) {
-		final List<Users> userList = userRepository.findByFullNameAndPassword(fullName, password);
-		if (userList.isEmpty()) {
-			return null;
-		} else {
-			return userList.get(0);
-		}
-	}
-
 	public Users loginUsers(final String fullName, final String password) {
-		final Users users = findByIDUsers(fullName, password);
-		if (users.getPassword().equals(password)) {
-			return users;
-		} else {
-			return null;
+		Users user = null;
+		final List<Users> userList = userRepository.findByFullNameAndPassword(fullName, password);
+		if (!userList.isEmpty()) {
+			user = userList.get(0);
 		}
+		return user;
 	}
 
 }

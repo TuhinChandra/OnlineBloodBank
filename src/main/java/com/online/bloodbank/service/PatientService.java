@@ -18,11 +18,11 @@ public class PatientService {
 	}
 
 	public Patient findPatient(final String patientName) {
+		Patient patient = null;
 		final List<Patient> patientList = patientRepository.findByPatientName(patientName);
-		if (patientList.isEmpty()) {
-			return null;
-		} else {
-			return patientList.get(0);
+		if (!patientList.isEmpty()) {
+			patient = patientList.get(0);
 		}
+		return patient;
 	}
 }

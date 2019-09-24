@@ -1,5 +1,7 @@
 package com.online.bloodbank.controller;
 
+import static com.online.bloodbank.constant.APIBasePathConstant.USER_API_BASEPATH;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +15,12 @@ import com.online.bloodbank.model.Users;
 import com.online.bloodbank.service.UserService;
 
 @RestController
+@RequestMapping(value = USER_API_BASEPATH)
 public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@PostMapping(value = "/user/registration", produces = "application/json")
+	@PostMapping(value = "/registration", produces = "application/json")
 	public Users registerUser(@RequestParam("fullName") final String fullName,
 			@RequestParam("password") final String password, @RequestParam("contactName") final String contactName,
 			@RequestParam("emailID") final String emailID, @RequestParam("contactNo") final long contactNo) {
@@ -26,7 +29,7 @@ public class UserController {
 		return userService.registerUser(user);
 	}
 
-	@RequestMapping(value = "/user/login", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public Users loginEmployee(@RequestParam("fullName") final String fullName,
 			@RequestParam("password") final String password) {

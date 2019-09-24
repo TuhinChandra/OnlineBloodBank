@@ -1,8 +1,12 @@
 package com.online.bloodbank.controller;
 
+import static com.online.bloodbank.constant.APIBasePathConstant.HOSPITAL_API_BASEPATH;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,14 +16,14 @@ import com.online.bloodbank.model.Hospital;
 import com.online.bloodbank.service.HospitalService;
 
 @RestController
-
+@RequestMapping(value = HOSPITAL_API_BASEPATH)
 public class HospitalController {
 
 	@Autowired
 	private HospitalService hospitalService;
 
 	// TODO: Use Post
-	@PostMapping(value = "/hospital/registration/", produces = "application/json")
+	@PostMapping(value = "/registration/", produces = "application/json")
 	public Hospital registerHospital(@RequestParam("registrationNo") final String registrationNo,
 			@RequestParam("hospitalName") final String hospitalName, @RequestParam("city") final String city,
 			@RequestParam("streetNo") final String streetNo, @RequestParam("pinCode") final long pinCode,
@@ -31,9 +35,8 @@ public class HospitalController {
 		return hospitalService.registerHospital(hospital);
 	}
 
-	// TODO: @GetMapping
-	@GetMapping(value = "/hospital/fetchFromName/", produces = "application/json")
-	public Hospital fetchHospitalFromName(@RequestParam("hospitalName") final String hospitalName) {
-		return hospitalService.findByhospitalName(hospitalName);
+	@GetMapping(value = "/{hospitalName}", produces = "application/json")
+	public Hospital fetchHospitalFromName(@PathVariable("hospitalName") final String hospitalName) {
+		return hospitalService.findByHospitalName(hospitalName);
 	}
 }

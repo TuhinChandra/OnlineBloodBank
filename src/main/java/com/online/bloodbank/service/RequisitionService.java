@@ -32,25 +32,25 @@ public class RequisitionService {
 	}
 
 	public Requisition processRequisition(final long id, final Status reqStatus) {
+		Requisition requisition = null;
 		final List<Requisition> listRequisition = requisitionRepository.findById(id);
-		if (listRequisition.isEmpty()) {
-			return null;
-		} else {
-			final Requisition requisition = listRequisition.get(0);
+		if (!listRequisition.isEmpty()) {
+			requisition = listRequisition.get(0);
 			requisition.setReqStatus(reqStatus);
-			return requisitionRepository.save(requisition);
+			requisitionRepository.save(requisition);
 		}
+		return requisition;
 	}
 
 	public Requisition updateRegistrationNumber(final long id, final String registrationNumber) {
+		Requisition requisition = null;
 		final List<Requisition> listRequisition = requisitionRepository.findById(id);
-		if (listRequisition.isEmpty()) {
-			return null;
-		} else {
-			final Requisition requisition = listRequisition.get(0);
+		if (!listRequisition.isEmpty()) {
+			requisition = listRequisition.get(0);
 			requisition.setRegistrationNumber(registrationNumber);
-			return requisitionRepository.save(requisition);
+			requisitionRepository.save(requisition);
 		}
+		return requisition;
 	}
 
 }

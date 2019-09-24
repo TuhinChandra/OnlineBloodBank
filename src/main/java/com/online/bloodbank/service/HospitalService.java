@@ -19,13 +19,13 @@ public class HospitalService {
 
 	}
 
-	public Hospital findByhospitalName(final String hospitalName) {
-		final List<Hospital> hospitalList = hospitalRepository.findByhospitalName(hospitalName);
-		if (hospitalList.isEmpty()) {
-			return null;
-		} else {
-			return hospitalList.get(0);
+	public Hospital findByHospitalName(final String hospitalName) {
+		Hospital hospital = null;
+		final List<Hospital> hospitalList = hospitalRepository.findByHospitalName(hospitalName);
+		if (!hospitalList.isEmpty()) {
+			hospital = hospitalList.get(0);
 		}
+		return hospital;
 	}
 
 }

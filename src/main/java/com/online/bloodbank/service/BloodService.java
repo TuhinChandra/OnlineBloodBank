@@ -18,25 +18,23 @@ public class BloodService {
 	private HospitalService hospitalService;
 
 	public Blood addBloodStockInHospital(final Blood blood) {
-
 		final String hospitalName = blood.getHospital().getHospitalName();
-		final Hospital hospital = hospitalService.findByhospitalName(hospitalName);
+		final Hospital hospital = hospitalService.findByHospitalName(hospitalName);
 		if (hospital.getHospitalName().equals(hospitalName)) {
 			blood.setHospital(hospital);
-			return bloodRepository.save(blood);
-		} else {
-			return null;
+			bloodRepository.save(blood);
 		}
+		return blood;
 
 	}
 
 	public Blood findByBloodGroupAndBloodType(final String bloodGroup, final String bloodType) {
+		Blood blood = null;
 		final List<Blood> listBlood = bloodRepository.findByBloodGroupAndBloodType(bloodGroup, bloodType);
-		if (listBlood.isEmpty()) {
-			return null;
-		} else {
-			return listBlood.get(0);
+		if (!listBlood.isEmpty()) {
+			blood = listBlood.get(0);
 		}
+		return blood;
 	}
 
 	public Blood updateBloodStockInHospital(final Blood blood, final int issuedStockQty) {
@@ -46,10 +44,9 @@ public class BloodService {
 		final int updatedStockQty = bloodToUpdate.getBloodStock() - issuedStockQty;
 		if (hospitalName.equalsIgnoreCase(bloodToUpdate.getHospital().getHospitalName())) {
 			bloodToUpdate.setBloodStock(updatedStockQty);
-			return bloodRepository.save(bloodToUpdate);
-		} else {
-			return null;
+			bloodRepository.save(bloodToUpdate);
 		}
+		return bloodToUpdate;
 
 	}
 

@@ -20,12 +20,12 @@ public class ContactService {
 	}
 
 	public Contact getContactDetails(final long id) {
+		Contact contact = null;
 		final List<Contact> listContact = contactRepository.findById(id);
-		if (listContact.isEmpty()) {
-			return null;
-		} else {
-			return listContact.get(0);
+		if (!listContact.isEmpty()) {
+			contact = listContact.get(0);
 		}
+		return contact;
 
 	}
 
