@@ -42,4 +42,15 @@ public class RequisitionService {
 		}
 	}
 
+	public Requisition updateRegistrationNumber(final long id, final String registrationNumber) {
+		final List<Requisition> listRequisition = requisitionRepository.findById(id);
+		if (listRequisition.isEmpty()) {
+			return null;
+		} else {
+			final Requisition requisition = listRequisition.get(0);
+			requisition.setRegistrationNumber(registrationNumber);
+			return requisitionRepository.save(requisition);
+		}
+	}
+
 }

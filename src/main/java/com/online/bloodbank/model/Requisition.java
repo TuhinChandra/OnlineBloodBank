@@ -26,6 +26,11 @@ public class Requisition {
 		return reqStatus;
 	}
 
+	public Requisition() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public void setReqStatus(final Status reqStatus) {
 		this.reqStatus = reqStatus;
 	}
