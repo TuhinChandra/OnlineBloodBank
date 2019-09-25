@@ -23,7 +23,7 @@ public class PatientController {
 	@PostMapping(value = "/registration/", produces = "application/json")
 	public Patient registerPatient(@RequestParam("patientName") final String patientName,
 			@RequestParam("bloodGroup") final String bloodGroup,
-			@RequestParam("registrationNumber") final String registrationNumber) {
+			@RequestParam(value = "registrationNumber", required = false) final String registrationNumber) {
 		final Patient patient = new Patient(patientName, bloodGroup, registrationNumber, null);
 		return patientService.registerPatient(patient);
 	}

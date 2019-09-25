@@ -23,14 +23,15 @@ public class RequisitionController {
 	@PostMapping(value = "/add", produces = "application/json")
 	public Requisition addRequisition(@RequestParam("patientName") final String patientName,
 			@RequestParam("reqBloodUnit") final int reqBloodUnit,
-			@RequestParam(value = "registrationNumber", required = false) final String registrationNumber) {
+			@RequestParam(value = "registrationNumber") final String registrationNumber) {
 		return requisitionService.addRequisition(patientName, reqBloodUnit, registrationNumber);
 	}
 
 	@PutMapping(value = "/process", produces = "application/json")
 	public Requisition processRequisition(@RequestParam("id") final long id,
-			@RequestParam("reqStatus") final Status reqStatus) {
-		final Requisition requisition = requisitionService.processRequisition(id, reqStatus);
+			@RequestParam("reqStatus") final Status reqStatus, @RequestParam("bloodType") final String bloodType,
+			@RequestParam(value = "hospitalId", required = false) final long hospitalId) {
+		final Requisition requisition = requisitionService.processRequisition(id, reqStatus, bloodType, hospitalId);
 		return requisition;
 	}
 }

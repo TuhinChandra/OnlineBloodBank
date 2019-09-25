@@ -25,7 +25,7 @@ public class BloodController {
 	@PostMapping(value = "/stock/", produces = "application/json")
 	public Blood addBloodStock(@RequestParam("bloodGroup") final String bloodGroup,
 			@RequestParam("bloodType") final String bloodType, @RequestParam("bloodStock") final int bloodStock,
-			@RequestParam("hospitalName") final long hospitalId) {
+			@RequestParam("hospitalId") final long hospitalId) {
 
 		final Blood blood = new Blood(bloodGroup, bloodType, bloodStock, hospitalId);
 		return bloodService.addBloodStockInHospital(blood);

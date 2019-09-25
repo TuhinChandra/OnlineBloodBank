@@ -17,9 +17,19 @@ public class PatientService {
 		return patientRepository.save(patient);
 	}
 
-	public Patient findPatient(final String patientName) {
+	public Patient findPatient(final String registrationNumber) {
 		Patient patient = null;
-		final List<Patient> patientList = patientRepository.findByPatientName(patientName);
+		final List<Patient> patientList = patientRepository.findByRegistrationNumber(registrationNumber);
+		if (!patientList.isEmpty()) {
+			patient = patientList.get(0);
+		}
+		return patient;
+	}
+
+	public Patient FindById(final long id) {
+
+		Patient patient = null;
+		final List<Patient> patientList = patientRepository.findById(id);
 		if (!patientList.isEmpty()) {
 			patient = patientList.get(0);
 		}
