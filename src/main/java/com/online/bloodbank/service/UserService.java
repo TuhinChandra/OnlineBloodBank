@@ -18,9 +18,9 @@ public class UserService {
 		return userSaved;
 	}
 
-	public Users loginUsers(final String fullName, final String password) {
+	public Users loginUsers(final String userName, final String password) {
 		Users user = null;
-		final List<Users> userList = userRepository.findByFullNameAndPassword(fullName, password);
+		final List<Users> userList = userRepository.findByUserNameAndPassword(userName, password);
 		if (!userList.isEmpty()) {
 			user = userList.get(0);
 		}

@@ -13,6 +13,7 @@ public class Users {
 	@GeneratedValue
 	private long id;
 	private String fullName;
+	private String userName;
 	private String password;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(unique = true)
@@ -46,9 +47,10 @@ public class Users {
 		this.contact = contact;
 	}
 
-	public Users(final String fullName, final String password, final Contact contact) {
+	public Users(final String fullName, final String userName, final String password, final Contact contact) {
 		super();
 		this.fullName = fullName;
+		this.userName = userName;
 		this.password = password;
 		this.contact = contact;
 	}
@@ -56,6 +58,14 @@ public class Users {
 	public Users() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(final String userName) {
+		this.userName = userName;
 	}
 
 }

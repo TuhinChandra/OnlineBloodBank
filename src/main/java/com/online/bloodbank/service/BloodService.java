@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.online.bloodbank.enums.BloodGroup;
 import com.online.bloodbank.model.Blood;
 import com.online.bloodbank.model.Hospital;
 import com.online.bloodbank.repository.BloodRepository;
@@ -35,7 +37,7 @@ public class BloodService {
 		return blood;
 	}
 
-	public Blood findByBloodGroupAndBloodTypeAndHospitalID(final String bloodGroup, final String bloodType,
+	public Blood findByBloodGroupAndBloodTypeAndHospitalID(final BloodGroup bloodGroup, final String bloodType,
 			final long hospitalId) {
 		Blood blood = null;
 		final List<Blood> listBlood = bloodRepository.findByBloodGroupAndBloodTypeAndHospitalId(bloodGroup, bloodType,

@@ -1,6 +1,7 @@
 package com.online.bloodbank.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -16,7 +17,7 @@ public class Address {
 	private String streetNo;
 	private long pinCode;
 	private String state;
-	@OneToOne(mappedBy = "address")
+	@OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
 	private Hospital hospital;
 
 	public Address() {

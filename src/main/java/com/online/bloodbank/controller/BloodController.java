@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.online.bloodbank.enums.BloodGroup;
 import com.online.bloodbank.model.Blood;
 import com.online.bloodbank.service.BloodService;
 
@@ -23,7 +24,7 @@ public class BloodController {
 
 	// TODO: POST
 	@PostMapping(value = "/stock/", produces = "application/json")
-	public Blood addBloodStock(@RequestParam("bloodGroup") final String bloodGroup,
+	public Blood addBloodStock(@RequestParam("bloodGroup") final BloodGroup bloodGroup,
 			@RequestParam("bloodType") final String bloodType, @RequestParam("bloodStock") final int bloodStock,
 			@RequestParam("hospitalId") final long hospitalId) {
 
@@ -38,7 +39,7 @@ public class BloodController {
 	}
 
 	@PutMapping(value = "/stock/", produces = "application/json")
-	public Blood updateBloodStock(@RequestParam("bloodGroup") final String bloodGroup,
+	public Blood updateBloodStock(@RequestParam("bloodGroup") final BloodGroup bloodGroup,
 			@RequestParam("bloodType") final String bloodType, @RequestParam("issuedStockQty") final int issuedStockQty,
 			@RequestParam("hospitalID") final long hospitalId) {
 

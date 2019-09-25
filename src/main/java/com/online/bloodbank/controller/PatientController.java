@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.online.bloodbank.enums.BloodGroup;
 import com.online.bloodbank.model.Patient;
 import com.online.bloodbank.service.PatientService;
 
@@ -22,7 +23,7 @@ public class PatientController {
 
 	@PostMapping(value = "/registration/", produces = "application/json")
 	public Patient registerPatient(@RequestParam("patientName") final String patientName,
-			@RequestParam("bloodGroup") final String bloodGroup,
+			@RequestParam("bloodGroup") final BloodGroup bloodGroup,
 			@RequestParam(value = "registrationNumber", required = false) final String registrationNumber) {
 		final Patient patient = new Patient(patientName, bloodGroup, registrationNumber, null);
 		return patientService.registerPatient(patient);

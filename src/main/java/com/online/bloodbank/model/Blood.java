@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.online.bloodbank.enums.BloodGroup;
+
 @Entity
 
 public class Blood {
@@ -15,12 +17,12 @@ public class Blood {
 	@Id
 	@GeneratedValue
 	private long id;
-	private String bloodGroup;
+	private BloodGroup bloodGroup;
 	private String bloodType;
 	private int bloodStock;
 	private long hospitalId;
 
-	public Blood(final String bloodGroup, final String bloodType, final int bloodStock, final long hospitalId) {
+	public Blood(final BloodGroup bloodGroup, final String bloodType, final int bloodStock, final long hospitalId) {
 		super();
 		this.bloodGroup = bloodGroup;
 		this.bloodType = bloodType;
@@ -28,11 +30,11 @@ public class Blood {
 		this.hospitalId = hospitalId;
 	}
 
-	public String getBloodGroup() {
+	public BloodGroup getBloodGroup() {
 		return bloodGroup;
 	}
 
-	public void setBloodGroup(final String bloodGroup) {
+	public void setBloodGroup(final BloodGroup bloodGroup) {
 		this.bloodGroup = bloodGroup;
 	}
 

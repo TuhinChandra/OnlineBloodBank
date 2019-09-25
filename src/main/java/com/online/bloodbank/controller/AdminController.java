@@ -22,21 +22,22 @@ public class AdminController {
 
 	@PostMapping(value = "/registration", produces = "application/json")
 	public AdminUser registerAdmin(@RequestParam("fullName") final String fullName,
-			@RequestParam("password") final String password, @RequestParam("contactName") final String contactName,
-			@RequestParam("emailID") final String emailID, @RequestParam("contactNo") final long contactNo) {
+			@RequestParam("userName") final String userName, @RequestParam("password") final String password,
+			@RequestParam("contactName") final String contactName, @RequestParam("emailID") final String emailID,
+			@RequestParam("contactNo") final long contactNo) {
 
 		final Contact contact = new Contact(contactName, emailID, contactNo);
-		final AdminUser admin = new AdminUser(fullName, password, contact);
+		final AdminUser admin = new AdminUser(fullName, userName, password, contact);
 
 		return adminService.registerAdmin(admin);
 	}
 
 	@PostMapping(value = "/login", produces = "application/json")
 	@ResponseBody
-	public AdminUser loginAdmin(@RequestParam("userName") final String fullName,
+	public AdminUser loginAdmin(@RequestParam("userName") final String userName,
 			@RequestParam("password") final String password) {
 
-		return adminService.loginAdmin(fullName, password);
+		return adminService.loginAdmin(userName, password);
 	}
 
 }

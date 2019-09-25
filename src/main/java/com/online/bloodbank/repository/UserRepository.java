@@ -8,6 +8,6 @@ import com.online.bloodbank.model.Users;
 
 public interface UserRepository extends JpaRepository<Users, Long> {
 
-	List<Users> findByFullNameAndPassword(String fullName, String password);
+	List<Users> findByUserNameAndPassword(String userName, String password);
 
 }

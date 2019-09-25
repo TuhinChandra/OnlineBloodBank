@@ -19,15 +19,15 @@ public class Contact {
 	private String emailID;
 	private long contactNo;
 
-	@OneToOne(mappedBy = "contact", fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "contact", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Hospital hospital;
 
-	@OneToOne(mappedBy = "contact", fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "contact", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Users user;
 
-	@OneToOne(mappedBy = "contact", fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "contact", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private AdminUser adminUsers;
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.online.bloodbank.enums.BloodGroup;
 import com.online.bloodbank.enums.Status;
 import com.online.bloodbank.model.Blood;
 import com.online.bloodbank.model.Patient;
@@ -49,7 +50,7 @@ public class RequisitionService {
 				final int issuedStockQty = requisition.getReqBloodUnit();
 				final long patientId = requisition.getPatient_id();
 				final Patient patient = patientService.FindById(patientId);
-				final String bloodGroup = patient.getBloodGroup();
+				final BloodGroup bloodGroup = patient.getBloodGroup();
 
 				final Blood blood = bloodService.findByBloodGroupAndBloodTypeAndHospitalID(bloodGroup, bloodType,
 						hospitalId);
@@ -82,6 +83,13 @@ public class RequisitionService {
 			}
 		}
 		return requisition;
+	}
+
+	public List<Requisition> getRequisitionByStatus(final Status reqStatus) {
+
+		final List<Requisition> listRequisition = requisitionRepository.findByReqStatus(reqStatus);
+
+		return listRequisition;
 	}
 
 }

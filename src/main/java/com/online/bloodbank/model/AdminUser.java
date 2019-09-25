@@ -13,6 +13,7 @@ public class AdminUser {
 	@GeneratedValue
 	private long id;
 	private String fullName;
+	private String userName;
 	private String password;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Contact contact;
@@ -45,9 +46,10 @@ public class AdminUser {
 		this.contact = contact;
 	}
 
-	public AdminUser(final String fullName, final String password, final Contact contact) {
+	public AdminUser(final String fullName, final String userName, final String password, final Contact contact) {
 		super();
 		this.fullName = fullName;
+		this.userName = userName;
 		this.password = password;
 		this.contact = contact;
 	}
@@ -55,5 +57,13 @@ public class AdminUser {
 	public AdminUser() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(final String userName) {
+		this.userName = userName;
 	}
 }

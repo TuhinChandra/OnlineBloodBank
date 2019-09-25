@@ -18,4 +18,11 @@ public interface VariableConstant {
 	// String HOSPITAL_ADDRESS = "address";
 	// String HOSPITAL_CONTACT = "contact";
 
+	String BLOOD_ID = "id";
+	String BLOOD_GROUP = "bloodGroup";
+	String BLOOD_TYPE = "bloodType";
+	String BLOOD_STOCK = "bloodStock";
+
+	String REQUIRED_QTY = "requiredQty";
+
 }

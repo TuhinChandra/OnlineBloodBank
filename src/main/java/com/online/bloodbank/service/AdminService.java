@@ -18,9 +18,9 @@ public class AdminService {
 		return adminRepository.save(admin);
 	}
 
-	public AdminUser loginAdmin(final String fullName, final String password) {
+	public AdminUser loginAdmin(final String userName, final String password) {
 		AdminUser adminUser = null;
-		final List<AdminUser> adminList = adminRepository.findByFullNameAndPassword(fullName, password);
+		final List<AdminUser> adminList = adminRepository.findByUserNameAndPassword(userName, password);
 		if (!adminList.isEmpty()) {
 			adminUser = adminList.get(0);
 		}
