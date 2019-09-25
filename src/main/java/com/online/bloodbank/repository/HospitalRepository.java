@@ -11,4 +11,6 @@ import com.online.bloodbank.model.Hospital;
 public interface HospitalRepository extends JpaRepository<Hospital, Long> {
 
 	List<Hospital> findByHospitalName(String hospitalName);
+
+	List<Hospital> findById(long id);
 }

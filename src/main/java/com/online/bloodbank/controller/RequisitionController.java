@@ -33,11 +33,4 @@ public class RequisitionController {
 		final Requisition requisition = requisitionService.processRequisition(id, reqStatus);
 		return requisition;
 	}
-
-	@PutMapping(value = "/update", produces = "application/json")
-	public Requisition updateRegistrationNumber(@RequestParam("id") final long id,
-			@RequestParam("registrationNumber") final String registrationNumber) {
-		final Requisition requisition = requisitionService.updateRegistrationNumber(id, registrationNumber);
-		return requisition;
-	}
 }

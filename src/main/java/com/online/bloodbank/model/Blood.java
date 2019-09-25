@@ -1,11 +1,8 @@
 package com.online.bloodbank.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 @Entity
 
@@ -21,9 +18,15 @@ public class Blood {
 	private String bloodGroup;
 	private String bloodType;
 	private int bloodStock;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(unique = true)
-	private Hospital hospital;
+	private long hospitalId;
+
+	public Blood(final String bloodGroup, final String bloodType, final int bloodStock, final long hospitalId) {
+		super();
+		this.bloodGroup = bloodGroup;
+		this.bloodType = bloodType;
+		this.bloodStock = bloodStock;
+		this.hospitalId = hospitalId;
+	}
 
 	public String getBloodGroup() {
 		return bloodGroup;
@@ -49,20 +52,12 @@ public class Blood {
 		this.bloodStock = bloodStock;
 	}
 
-	public Blood(final String bloodGroup, final String bloodType, final int bloodStock, final Hospital hospital) {
-		super();
-		this.bloodGroup = bloodGroup;
-		this.bloodType = bloodType;
-		this.bloodStock = bloodStock;
-		this.hospital = hospital;
+	public long getHospitalId() {
+		return hospitalId;
 	}
 
-	public Hospital getHospital() {
-		return hospital;
-	}
-
-	public void setHospital(final Hospital hospital) {
-		this.hospital = hospital;
+	public void setHospitalId(final long hospitalId) {
+		this.hospitalId = hospitalId;
 	}
 
 }

@@ -28,4 +28,13 @@ public class HospitalService {
 		return hospital;
 	}
 
+	public Hospital findByHospitalId(final long id) {
+		Hospital hospital = null;
+		final List<Hospital> hospitalList = hospitalRepository.findById(id);
+		if (!hospitalList.isEmpty()) {
+			hospital = hospitalList.get(0);
+		}
+		return hospital;
+	}
+
 }

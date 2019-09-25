@@ -21,7 +21,7 @@ public class RequisitionService {
 	public Requisition addRequisition(final String patientName, final int reqBloodUnit,
 			final String registrationNumber) {
 		final Patient patient = patientService.findPatient(patientName);
-		final Requisition requisition = new Requisition(Status.SUBMITTED, reqBloodUnit, patient, registrationNumber);
+		final Requisition requisition = new Requisition(Status.SUBMITTED, reqBloodUnit, patient);
 		return requisitionRepository.save(requisition);
 
 	}
@@ -37,17 +37,6 @@ public class RequisitionService {
 		if (!listRequisition.isEmpty()) {
 			requisition = listRequisition.get(0);
 			requisition.setReqStatus(reqStatus);
-			requisitionRepository.save(requisition);
-		}
-		return requisition;
-	}
-
-	public Requisition updateRegistrationNumber(final long id, final String registrationNumber) {
-		Requisition requisition = null;
-		final List<Requisition> listRequisition = requisitionRepository.findById(id);
-		if (!listRequisition.isEmpty()) {
-			requisition = listRequisition.get(0);
-			requisition.setRegistrationNumber(registrationNumber);
 			requisitionRepository.save(requisition);
 		}
 		return requisition;

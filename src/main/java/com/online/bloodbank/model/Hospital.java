@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 public class Hospital {
 	@Id
 	@GeneratedValue
-	private long ID;
+	private long id;
 	private String registrationNo;
 	private String hospitalName;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
