@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Hospital {
 	@Id
@@ -15,8 +17,10 @@ public class Hospital {
 	private String registrationNo;
 	private String hospitalName;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnoreProperties
 	private Address address;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnoreProperties
 	private Contact contact;
 
 	public Hospital() {

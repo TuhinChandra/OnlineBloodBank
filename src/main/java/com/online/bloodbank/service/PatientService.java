@@ -14,7 +14,11 @@ public class PatientService {
 	private PatientRepository patientRepository;
 
 	public Patient registerPatient(final Patient patient) {
-		return patientRepository.save(patient);
+		Patient savePatient = null;
+		if (null == findPatient(patient.getRegistrationNumber())) {
+			savePatient = patientRepository.save(patient);
+		}
+		return savePatient;
 	}
 
 	public Patient findPatient(final String registrationNumber) {

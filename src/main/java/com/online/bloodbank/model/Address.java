@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 
 public class Address {
@@ -18,6 +20,7 @@ public class Address {
 	private long pinCode;
 	private String state;
 	@OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
+	@JsonIgnoreProperties
 	private Hospital hospital;
 
 	public Address() {

@@ -12,12 +12,14 @@ public class Requisition {
 	@GeneratedValue
 	private long id;
 	private Status reqStatus;
+	private String bloodType;
 	private int reqBloodUnit;
 	private long patient_id;
 
-	public Requisition(final Status reqStatus, final int reqBloodUnit, final long patient_id) {
+	public Requisition(final Status reqStatus, final String bloodType, final int reqBloodUnit, final long patient_id) {
 		super();
 		this.reqStatus = reqStatus;
+		this.bloodType = bloodType;
 		this.reqBloodUnit = reqBloodUnit;
 		this.patient_id = patient_id;
 	}
@@ -49,6 +51,14 @@ public class Requisition {
 
 	public void setPatient_id(final long patient_id) {
 		this.patient_id = patient_id;
+	}
+
+	public String getBloodType() {
+		return bloodType;
+	}
+
+	public void setBloodType(final String bloodType) {
+		this.bloodType = bloodType;
 	}
 
 }

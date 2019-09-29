@@ -24,11 +24,11 @@ public class BloodController {
 
 	// TODO: POST
 	@PostMapping(value = "/stock/", produces = "application/json")
-	public Blood addBloodStock(@RequestParam("bloodGroup") final BloodGroup bloodGroup,
+	public Blood addBloodStock(@RequestParam("bloodGroup") final String bloodGroup,
 			@RequestParam("bloodType") final String bloodType, @RequestParam("bloodStock") final int bloodStock,
 			@RequestParam("hospitalId") final long hospitalId) {
 
-		final Blood blood = new Blood(bloodGroup, bloodType, bloodStock, hospitalId);
+		final Blood blood = new Blood(BloodGroup.fromValue(bloodGroup), bloodType, bloodStock, hospitalId);
 		return bloodService.addBloodStockInHospital(blood);
 
 	}
@@ -39,12 +39,12 @@ public class BloodController {
 	}
 
 	@PutMapping(value = "/stock/", produces = "application/json")
-	public Blood updateBloodStock(@RequestParam("bloodGroup") final BloodGroup bloodGroup,
+	public Blood updateBloodStock(@RequestParam("bloodGroup") final String bloodGroup,
 			@RequestParam("bloodType") final String bloodType, @RequestParam("issuedStockQty") final int issuedStockQty,
 			@RequestParam("hospitalID") final long hospitalId) {
 
 		// final Hospital hospital = new Hospital(id, null, null, null);
-		final Blood blood = new Blood(bloodGroup, bloodType, 0, hospitalId);
+		final Blood blood = new Blood(BloodGroup.fromValue(bloodGroup), bloodType, 0, hospitalId);
 
 		return bloodService.updateBloodStockInHospital(blood, issuedStockQty, hospitalId);
 

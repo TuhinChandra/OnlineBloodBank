@@ -22,12 +22,11 @@ public class RequisitionService {
 	@Autowired
 	RequisitionRepository requisitionRepository;
 
-	public Requisition addRequisition(final String patientName, final int reqBloodUnit,
-			final String registrationNumber) {
+	public Requisition addRequisition(final String bloodType, final int reqBloodUnit, final String registrationNumber) {
 		Requisition requisition = null;
 		final Patient patient = patientService.findPatient(registrationNumber);
 		if (null != patient) {
-			requisition = new Requisition(Status.SUBMITTED, reqBloodUnit, patient.getId());
+			requisition = new Requisition(Status.SUBMITTED, bloodType, reqBloodUnit, patient.getId());
 			requisitionRepository.save(requisition);
 		}
 		return requisition;

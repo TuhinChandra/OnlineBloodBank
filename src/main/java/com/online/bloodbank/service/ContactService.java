@@ -36,4 +36,13 @@ public class ContactService {
 		return contactRepository.save(contact);
 
 	}
+
+	public Contact getContactFromEmail(final Contact contact) {
+		Contact geContact = null;
+		final List<Contact> listContact = contactRepository.findByEmailID(contact.getEmailID());
+		if (!listContact.isEmpty()) {
+			geContact = listContact.get(0);
+		}
+		return geContact;
+	}
 }

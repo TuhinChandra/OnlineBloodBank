@@ -20,11 +20,9 @@ public class Contact {
 	private long contactNo;
 
 	@OneToOne(mappedBy = "contact", fetch = FetchType.LAZY)
-	@JsonIgnore
 	private Hospital hospital;
 
 	@OneToOne(mappedBy = "contact", fetch = FetchType.LAZY)
-	@JsonIgnore
 	private Users user;
 
 	@OneToOne(mappedBy = "contact", fetch = FetchType.LAZY)

@@ -22,11 +22,10 @@ public class UserController {
 
 	@PostMapping(value = "/registration", produces = "application/json")
 	public Users registerUser(@RequestParam("fullName") final String fullName,
-			@RequestParam("userName") final String userName, @RequestParam("password") final String password,
-			@RequestParam("contactName") final String contactName, @RequestParam("emailID") final String emailID,
+			@RequestParam("password") final String password, @RequestParam("emailID") final String emailID,
 			@RequestParam("contactNo") final long contactNo) {
-		final Contact contact = new Contact(contactName, emailID, contactNo);
-		final Users user = new Users(fullName, userName, password, contact);
+		final Contact contact = new Contact(fullName, emailID, contactNo);
+		final Users user = new Users(fullName, emailID, password, contact);
 		return userService.registerUser(user);
 	}
 

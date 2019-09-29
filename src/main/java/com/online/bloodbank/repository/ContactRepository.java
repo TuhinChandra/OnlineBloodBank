@@ -10,4 +10,6 @@ import com.online.bloodbank.model.Contact;
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, String> {
 	List<Contact> findById(long id);
+
+	List<Contact> findByEmailID(String emailID);
 }

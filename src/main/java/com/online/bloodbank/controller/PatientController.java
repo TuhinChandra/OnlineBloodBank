@@ -23,15 +23,15 @@ public class PatientController {
 
 	@PostMapping(value = "/registration/", produces = "application/json")
 	public Patient registerPatient(@RequestParam("patientName") final String patientName,
-			@RequestParam("bloodGroup") final BloodGroup bloodGroup,
+			@RequestParam("bloodGroup") final String bloodGroup,
 			@RequestParam(value = "registrationNumber", required = false) final String registrationNumber) {
-		final Patient patient = new Patient(patientName, bloodGroup, registrationNumber, null);
+		final Patient patient = new Patient(patientName, BloodGroup.fromValue(bloodGroup), registrationNumber, null);
 		return patientService.registerPatient(patient);
 	}
 
-	@GetMapping(value = "/{patientName}", produces = "application/json")
-	public Patient getPatientByName(@PathVariable("patientName") final String patientName) {
-		return patientService.findPatient(patientName);
+	@GetMapping(value = "/{registrationNumber}", produces = "application/json")
+	public Patient getPatientByRegistrationNo(@PathVariable("registrationNumber") final String registrationNumber) {
+		return patientService.findPatient(registrationNumber);
 	}
 
 }

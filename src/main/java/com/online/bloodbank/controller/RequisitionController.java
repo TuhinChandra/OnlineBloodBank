@@ -21,10 +21,9 @@ public class RequisitionController {
 	private RequisitionService requisitionService;
 
 	@PostMapping(value = "/add", produces = "application/json")
-	public Requisition addRequisition(@RequestParam("patientName") final String patientName,
-			@RequestParam("reqBloodUnit") final int reqBloodUnit,
-			@RequestParam(value = "registrationNumber") final String registrationNumber) {
-		return requisitionService.addRequisition(patientName, reqBloodUnit, registrationNumber);
+	public Requisition addRequisition(@RequestParam(value = "registrationNumber") final String registrationNumber,
+			@RequestParam("bloodType") final String bloodType, @RequestParam("reqBloodUnit") final int reqBloodUnit) {
+		return requisitionService.addRequisition(bloodType, reqBloodUnit, registrationNumber);
 	}
 
 	@PutMapping(value = "/process", produces = "application/json")
