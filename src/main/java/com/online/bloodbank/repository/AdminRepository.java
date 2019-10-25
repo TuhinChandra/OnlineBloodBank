@@ -8,7 +8,9 @@ import com.online.bloodbank.model.AdminUser;
 
 public interface AdminRepository extends JpaRepository<AdminUser, Long> {
 
-	List<AdminUser> findByUserNameAndPassword(String userName, String password);
+	List<AdminUser> findByEmailIdAndPassword(String emailId, String password);
 
-	List<AdminUser> findByUserName(String userName);
+	List<AdminUser> findByEmailId(String emailId);
+
+	List<AdminUser> findByFullName(String fullName);
 }

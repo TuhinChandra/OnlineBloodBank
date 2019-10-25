@@ -3,6 +3,7 @@ package com.online.bloodbank.controller;
 import static com.online.bloodbank.constant.APIBasePathConstant.HOSPITAL_API_BASEPATH;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,12 +18,12 @@ import com.online.bloodbank.service.HospitalService;
 
 @RestController
 @RequestMapping(value = HOSPITAL_API_BASEPATH)
+@CrossOrigin(origins = "http://localhost:9091")
 public class HospitalController {
 
 	@Autowired
 	private HospitalService hospitalService;
 
-	// TODO: Use Post
 	@PostMapping(value = "/registration/", produces = "application/json")
 	public Hospital registerHospital(@RequestParam("registrationNo") final String registrationNo,
 			@RequestParam("hospitalName") final String hospitalName, @RequestParam("city") final String city,

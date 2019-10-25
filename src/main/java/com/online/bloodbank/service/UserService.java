@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.online.bloodbank.model.Contact;
 import com.online.bloodbank.model.Users;
 import com.online.bloodbank.repository.UserRepository;
 
@@ -14,22 +13,18 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
-	private ContactService contactService;
-
 	public Users registerUser(final Users user) {
-		Users userSaved = null;
-		final Contact contact = contactService.getContactFromEmail(user.getContact());
+		final List<Users> userList = userRepository.findByMobileNo(user.getMobileNo());
 
-		if (null == contact) {
-			userSaved = userRepository.save(user);
+		if (userList.isEmpty()) {
+			userRepository.save(user);
 		}
-		return userSaved;
+		return user;
 	}
 
-	public Users loginUsers(final String userName, final String password) {
+	public Users loginUsers(final String emailId, final String password) {
 		Users user = null;
-		final List<Users> userList = userRepository.findByUserNameAndPassword(userName, password);
+		final List<Users> userList = userRepository.findByEmailIdAndPassword(emailId, password);
 		if (!userList.isEmpty()) {
 			user = userList.get(0);
 		}

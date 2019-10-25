@@ -6,8 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.online.bloodbank.model.Users;
 
-public interface UserRepository extends JpaRepository<Users, Long> {
+public interface UserRepository extends JpaRepository<Users, String> {
 
-	List<Users> findByUserNameAndPassword(String userName, String password);
+	List<Users> findByEmailIdAndPassword(String emailId, String password);
+
+	List<Users> findByMobileNo(Long mobileNo);
 
 }

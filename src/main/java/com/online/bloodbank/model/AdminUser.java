@@ -1,11 +1,8 @@
 package com.online.bloodbank.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class AdminUser {
@@ -13,10 +10,10 @@ public class AdminUser {
 	@GeneratedValue
 	private long id;
 	private String fullName;
-	private String userName;
+	private String emailId;
 	private String password;
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Contact contact;
+	private String role;
+	private long contactNo;
 
 	public long getId() {
 		return id;
@@ -38,20 +35,13 @@ public class AdminUser {
 		this.password = password;
 	}
 
-	public Contact getContact() {
-		return contact;
-	}
-
-	public void setContact(final Contact contact) {
-		this.contact = contact;
-	}
-
-	public AdminUser(final String fullName, final String userName, final String password, final Contact contact) {
+	public AdminUser(final String fullName, final String emailId, final String password, final String role, final long contactNo) {
 		super();
 		this.fullName = fullName;
-		this.userName = userName;
+		this.emailId = emailId;
 		this.password = password;
-		this.contact = contact;
+		this.role = role;
+		this.contactNo = contactNo;
 	}
 
 	public AdminUser() {
@@ -59,11 +49,27 @@ public class AdminUser {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getEmailId() {
+		return emailId;
 	}
 
-	public void setUserName(final String userName) {
-		this.userName = userName;
+	public void setEmailId(final String emailId) {
+		this.emailId = emailId;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(final String role) {
+		this.role = role;
+	}
+
+	public long getContactNo() {
+		return contactNo;
+	}
+
+	public void setContactNo(final long contactNo) {
+		this.contactNo = contactNo;
 	}
 }

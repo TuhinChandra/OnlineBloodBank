@@ -6,8 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 
 public class Contact {
@@ -21,13 +19,6 @@ public class Contact {
 
 	@OneToOne(mappedBy = "contact", fetch = FetchType.LAZY)
 	private Hospital hospital;
-
-	@OneToOne(mappedBy = "contact", fetch = FetchType.LAZY)
-	private Users user;
-
-	@OneToOne(mappedBy = "contact", fetch = FetchType.LAZY)
-	@JsonIgnore
-	private AdminUser adminUsers;
 
 	public Contact() {
 		super();
@@ -71,14 +62,6 @@ public class Contact {
 
 	public void setId(final long id) {
 		this.id = id;
-	}
-
-	public AdminUser getAdminUsers() {
-		return adminUsers;
-	}
-
-	public void setAdminUsers(final AdminUser adminUsers) {
-		this.adminUsers = adminUsers;
 	}
 
 }

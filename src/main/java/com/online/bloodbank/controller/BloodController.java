@@ -22,7 +22,6 @@ public class BloodController {
 	@Autowired
 	private BloodService bloodService;
 
-	// TODO: POST
 	@PostMapping(value = "/stock/", produces = "application/json")
 	public Blood addBloodStock(@RequestParam("bloodGroup") final String bloodGroup,
 			@RequestParam("bloodType") final String bloodType, @RequestParam("bloodStock") final int bloodStock,
@@ -43,7 +42,6 @@ public class BloodController {
 			@RequestParam("bloodType") final String bloodType, @RequestParam("issuedStockQty") final int issuedStockQty,
 			@RequestParam("hospitalID") final long hospitalId) {
 
-		// final Hospital hospital = new Hospital(id, null, null, null);
 		final Blood blood = new Blood(BloodGroup.fromValue(bloodGroup), bloodType, 0, hospitalId);
 
 		return bloodService.updateBloodStockInHospital(blood, issuedStockQty, hospitalId);
